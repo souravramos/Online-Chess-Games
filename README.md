@@ -2,7 +2,7 @@
 
 <br>
 
-This repository contains SQL Data Exploraton of the dataset "Online Chess Games" from Maven Analytics. The excel file contains data for 20,000+ chess games played on Lichess including moves, victor, rating, opening details and more. The SQL file carries code for the following queries :
+This repository contains SQL Data Exploraton of the dataset "Online Chess Games" from **Maven Analytics**. The excel file contains data for 20,000+ chess games played on Lichess including moves, victor, rating, opening details and more. The SQL file carries code for the following queries :
 
 1) What percentage of games were won by white? How many ended in a draw?
 2) Which opening move was most frequently used in games in which black won? What about when white won?
