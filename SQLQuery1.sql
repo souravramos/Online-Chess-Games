@@ -1,20 +1,10 @@
 USE OnlineChessGames;
 
-SELECT opening_shortname, COUNT(opening_shortname)
-FROM OnlineChessGames..ChessGames
-WHERE winner = 'White'
-GROUP BY opening_shortname
-ORDER BY 2 DESC;
-
-
-SELECT *
-FROM OnlineChessGames.dbo.ChessGames
-WHERE winner = 'White'
-AND white_rating < black_rating
-
-
-------------------------------------------------------------------------
--- Question 1 Solution
+-------------------------------------------------------------------------------------------------
+/*
+Question 1 : What percentage of games were won by white? 
+	     How many ended in a draw?
+*/
 
 -- Percentage of games won by white
 SELECT (SELECT COUNT(DISTINCT(game_id))
@@ -29,8 +19,11 @@ WHERE winner = 'Draw') * 100.0 / COUNT(DISTINCT(game_id)) AS DrawPercentage
 FROM OnlineChessGames..ChessGames
 
 
-------------------------------------------------------------------------
--- Question 2 Solution
+------------------------------------------------------------------------------------------------------------------------
+/*
+Question 2 : Which opening move was most frequently used in games in which black won? 
+	     What about when white won?
+*/
 
 -- Most frequently used opening(fullname) in which White/Black won
 SELECT TOP(1) opening_fullname,
@@ -49,8 +42,11 @@ GROUP BY opening_shortname
 ORDER BY 2 DESC;
 
 
-------------------------------------------------------------------------
--- Question 3 Solution
+------------------------------------------------------------------------------------------------------------------------
+/*
+Question 3 : What percentage of games are won by the player with the higher rating? 
+	     Does this vary by piece color?
+*/
 
 -- Percentage of games won by player with the higher rating
 SELECT
@@ -84,7 +80,7 @@ WHERE (white_rating > black_rating
 AND winner = 'White')) AS HigherRatingWin) * 100.0 / COUNT(*) AS HigherRatingWinPercentage
 FROM OnlineChessGames..ChessGames
 
----------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------
 /*
 Question 4 : Which user won the most amount of games? In what percentage of 
 			 those games was the user the higher rated player?
@@ -137,14 +133,4 @@ GROUP BY black_id) AS TotalPlayers
 GROUP BY white_id) AS tbl
 	ON TotalWinCountWithHigherRatingTable.white_id = tbl.white_id
 ORDER BY TotalWinCount DESC
-
-
-
-
-
---SELECT COUNT(*)
---FROM OnlineChessGames.dbo.ChessGames
---WHERE white_id = 'taranga' 
---AND winner = 'White'
-
 
